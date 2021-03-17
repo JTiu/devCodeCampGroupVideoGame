@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, redirect, flash, render_template, url_for, Blueprint
 
-bp = Blueprint('video_game', __name__)
+bp = Blueprint('video_game', __name__, )
 
 
 
@@ -9,6 +9,7 @@ def index():
     #get info saved as a variable and pass variable into view
     message = "video game index"
     return render_template('video_game/Index.html', message=message)
+
 
 
 @bp.route('/CopiesSoldPerConsole')
