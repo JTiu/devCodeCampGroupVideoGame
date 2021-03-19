@@ -42,8 +42,8 @@ def index():
 
 
 
-@bp.route('/CopiesSoldPerConsole')
-def CopiesSoldPerConsole(json_data=None):
+@bp.route('/GameDetails')
+def GamesDetails(json_data=None):
     # use 3 lines from above to get games data in here
     #goal
     # loop through entire data and build a new dictionary to represent sales per console
