@@ -1,11 +1,11 @@
-import requests
-from flask import render_template, Blueprint
+import requests # for future jt, https://www.pythonforbeginners.com/requests/using-requests-in-python#
+from flask import render_template, Blueprint #https://search.yahoo.com/search?fr=mcafee&type=E210US1249G0&p=what+is+a+blueprint+in+flask%3F#
 
-bp = Blueprint('video_game', __name__, )
+bp = Blueprint('video_game', __name__, )#https://www.afternerd.com/blog/python-__name__-__main__/#:~:text=__name__%20is%20simply%20a%20built-in%20variable%20in%20Python,go%20through%20a%20series%20of%20examples.%20Example%201#
 
 
-@bp.route('/')
-def index():
+@bp.route('/')#https://flask.palletsprojects.com/en/1.1.x/blueprints/#
+def index():#https://www.quora.com/Why-home-page-of-a-website-is-always-named-as-the-index-page#
     # get info saved as a variable and pass variable into view
     message = "Welcome to The DataTracker"
     response = requests.get('https://api.dccresource.com/api/games')
