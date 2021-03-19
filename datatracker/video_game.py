@@ -84,27 +84,27 @@ def GamesDetails(json_data=None):
 
 
 
-@bp.route('/test')
+@bp.route('/SampleQuestion')
 def test():
-    return "All good!"
+    return "All good in the hood!"
 
 
 
-# @bp.route('/postform', methods=('GET', 'POST'))
-# def other_example():
-#     if request.method == 'POST':
-#         page_title = request.form['title']
-#         error = None
-#
-#         if not page_title:
-#             error = 'You must enter a title'
-#
-#         if error is not None:
-#             flash(error)
-#         elif request.form['title'] == "go home":
-#             return redirect(url_for('sample.index'))
-#         else:
-#             return render_template('sample/postform.html', page_title=page_title)
-#
-#    else:
-#       return render_template('sample/postform.html', page_title="PostForm from Module Function")
+@bp.route('/', methods=('GET', 'POST'))
+def other_example():
+    if request.method == 'POST':
+        page_title = request.form['title']
+        error = None
+
+        if not page_title:
+            error = 'You must enter a title'
+
+        if error is not None:
+            flash(error)
+        elif request.form['title'] == "go home":
+            return redirect(url_for('sample.index'))
+        else:
+            return render_template('sample/postform.html', page_title=page_title)
+   #
+   # else:
+   #    return render_template('sample/postform.html', page_title="PostForm from Module Function")
