@@ -7,7 +7,7 @@ from datatracker.Models.video_games import Video_Games
 bp = Blueprint('video_game', __name__, )
 
 
-@bp.route('/')
+@bp.route('/') # the Home Page
 def index():
     # get info saved as a variable and pass variable into view
     message = "Welcome to The DataTracker"
@@ -42,7 +42,7 @@ def index():
 
 
 
-@bp.route('/GameDetails')
+@bp.route('/GameDetails') #THE GAME details page JT
 def GamesDetails(json_data=None):
     # use 3 lines from above to get games data in here
     #goal
@@ -84,27 +84,39 @@ def GamesDetails(json_data=None):
 
 
 
-@bp.route('/SampleQuestion')
+@bp.route('/SampleQuestion') #Sample Question MATT
 def test():
     return "All good in the hood!"
 
 
 
-@bp.route('/', methods=('GET', 'POST'))
-def other_example():
+@bp.route('/post', methods=('GET', 'POST')) # SEARCH FOR A GAME AAND SEE NUMBER OF COPIES SOLD PER CONSOLE
+def Get_Game_Name():
+    response = requests.get('https://api.dccresource.com/api/games')
+    content = response.json()
+    print(type(content))
+    print(dir(content))
+    print(len(content))
+    print(content[0])
+    # Capture user input into box
+    # take user input new variable and iterate through to find match .name
+    copies_sold_per_console = dict()
+
+
     if request.method == 'POST':
-        page_title = request.form['title']
+        Video_Games.name_search = request.form['name']
         error = None
 
-        if not page_title:
-            error = 'You must enter a title'
+        if not Video_Games.name_search:
+            error = 'Enter a Video game name'
 
         if error is not None:
             flash(error)
-        elif request.form['title'] == "go home":
-            return redirect(url_for('sample.index'))
+        elif request.form['name'] == "go home":
+            return redirect(url_for('video_game.post.html'))
         else:
-            return render_template('sample/postform.html', page_title=page_title)
-   #
-   # else:
-   #    return render_template('sample/postform.html', page_title="PostForm from Module Function")
+            return render_template('video_game/post.html', page_title=Video_Games)
+
+    else:
+        return render_template('video_game/post.html', page_title="PostForm from Module Function")
+

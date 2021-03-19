@@ -29,8 +29,8 @@ def other_example():
         elif request.form['title'] == "go home":
             return redirect(url_for('sample.index'))
         else:
-            return render_template('sample/postform.html', page_title=page_title)
+            return render_template('sample/post.html', page_title=page_title)
 
     else:
-        return render_template('sample/postform.html', page_title="PostForm from Module Function")
+        return render_template('sample/post.html', page_title="PostForm from Module Function")
 
