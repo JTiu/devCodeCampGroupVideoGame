@@ -13,17 +13,14 @@
 
 
 var ctx = document.getElementById('myChart').getContext('2d');
-var platforms = {{consoleNames|safe}} //safe is needed for variable to be recognized
-var sales = {{sales|safe}}
-//console.log(platforms) this will print the platform & sales to the console under inspect
-alert("hello sales")
+
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: platforms,
+         labels: ['Red: user_story_variable_1', 'Blue: user_story_variable_2 ', 'Yellow: user_story_variable_3', 'Green: user_story_variable_4', 'Purple: user_story_variable_5', 'Orange: user_story_variable_6'],
         datasets: [{
             label: 'This is the base page. I can manipulate the charts from this line of code, two lines above',
-            data: sales,
+            data: [5, 1, 41, 5, 15, 5],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

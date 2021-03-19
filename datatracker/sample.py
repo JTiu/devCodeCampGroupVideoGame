@@ -5,13 +5,13 @@ bp = Blueprint('sample', __name__)
 
 @bp.route('/test')
 def test():
-    return "All good!"
+    return "All  good, all day, in the sample page/ located through absolute path"
 
 
 @bp.route('/sample')
 def index():
-    message = "This text is coming from the 'sample.py' module, not the html file!"
-    phrase = "Python is cool!"
+    message = "First Message!"
+    phrase = "This is the phrase!"
     return render_template('sample/index.html', message=message, word=phrase)
 
 
