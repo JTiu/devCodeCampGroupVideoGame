@@ -7,7 +7,7 @@ from datatracker.Models.video_games import Video_Games
 bp = Blueprint('video_game', __name__, )
 
 
-@bp.route('/') # the Home Page
+@bp.route('/Index') # the Home Page
 def index():
     # get info saved as a variable and pass variable into view
     message = "Welcome to The DataTracker"
@@ -92,31 +92,32 @@ def test():
 
 @bp.route('/post', methods=('GET', 'POST')) # SEARCH FOR A GAME AAND SEE NUMBER OF COPIES SOLD PER CONSOLE
 def Get_Game_Name():
+    # Capture user input into box
+    # take user input new variable and iterate through to find match .name
+
     response = requests.get('https://api.dccresource.com/api/games')
     content = response.json()
     print(type(content))
     print(dir(content))
     print(len(content))
-    print(content[0])
-    # Capture user input into box
-    # take user input new variable and iterate through to find match .name
-    copies_sold_per_console = dict()
-
-
-    if request.method == 'POST':
-        Video_Games.name_search = request.form['name']
-        error = None
-
-        if not Video_Games.name_search:
-            error = 'Enter a Video game name'
-
-        if error is not None:
-            flash(error)
-        elif request.form['name'] == "go home":
-            return redirect(url_for('video_game.post.html'))
-        else:
-            return render_template('video_game/post.html', page_title=Video_Games)
-
-    else:
-        return render_template('video_game/post.html', page_title="PostForm from Module Function")
-
+    print(content[0])  # prints first index [0] of list# or -1 prints last element
+    sales_count = dict()
+    for game in content:
+        game_year = game["year"]
+        print("year of the game ", game_year)
+        if (game_year is not None) and (game_year >= 2013):
+            game_platform = game["platform"]
+            game_global = game["globalSales"]
+            if game_platform in sales_count:
+                sales_count[game_platform] = sales_count[game_platform] + game_global
+            else:
+                sales_count[game_platform] = game_global
+            print("sales count now is: ", sales_count)
+            print("\n\n\n")
+    items = sales_count.items()
+    print(items)
+    platforms = [i[0] for i in items]
+    sales = [i[1] for i in items]
+    print("platforms: ", platforms)
+    print("sales: ", sales)
+    return render_template('video_game/post.html',  response=response)
