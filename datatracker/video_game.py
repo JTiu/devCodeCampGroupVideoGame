@@ -53,10 +53,32 @@ def CopiesSoldPerConsole(json_data=None):
     # create a dictionary with key for each console in the data
     # loop through and add up total sales in appropraite key
 
-    response = requests.get('https://api.dccresource.com/api/games', json_data)
-    game = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
-    print(game[0].platform)
-    print(type(game))
+    response = requests.get('https://api.dccresource.com/api/games')
+    content = response.json()
+    print(type(content))
+    print(dir(content))
+    print(len(content))
+    print(content[0])
+    copies_sold_per_console = dict()
+    for game in content:
+        game_year = game["year"]
+        print("year of the game ", game_year)
+        if (game_year is not None) and (game_year >= 2013):
+            game_platform = game["platform"]
+            game_global = game["globalSales"]
+            if game_platform in copies_sold_per_console:
+                copies_sold_per_console[game_platform] = copies_sold_per_console[game_platform] + game_global
+            else:
+                copies_sold_per_console[game_platform] = game_global
+            print("sales count now is: ", copies_sold_per_console)
+            print("\n\n\n")
+    items = copies_sold_per_console.items()
+    print(items)
+    platforms = [i[0] for i in items]
+    sales = [i[1] for i in items]
+    print("platforms: ", platforms)
+    print("sales: ", sales)
+    return render_template('base.html', consoleNames=platforms, sales=sales)
     return render_template('video_game/index.html', game_data=json_data, response=response)
 
 
