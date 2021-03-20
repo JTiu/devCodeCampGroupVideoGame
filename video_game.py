@@ -35,7 +35,7 @@ def index():#https://www.quora.com/Why-home-page-of-a-website-is-always-named-as
     sales = [i[1] for i in items]
     print("platforms: ", platforms)
     print("sales: ", sales)
-    return render_template('base.html', consoleNames = platforms, sales=sales)
+    return "all good" #render_template('base.html', consoleNames = platforms, sales=sales)#
 
     #return render_template('video_game/Index.html', message=message, response=response)#
 
@@ -54,7 +54,7 @@ def CopiesSoldPerConsole():
     message = "This is the chart for video game copies sold per console since 2013 "
     response = requests.api('https://api.dccresource.com/api/games')
     json_data = '{"date": "13", month : may }'
-    return render_template('video_game/index.html', game_data=message)
+    return render_template('Trial.html', game_data=message)
 
 
 @bp.route('/test')

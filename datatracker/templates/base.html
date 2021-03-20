@@ -3,26 +3,27 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} The Home Page {% endblock %}</title>
+    <title>{% block title %}  {% endblock %}</title>
        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <canvas id="myChart"></canvas>
+</head>
+
+<body>
+ <canvas id="myChart"></canvas>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<!--<canvas id="myChart" width="400" height="400"></canvas>-->
+
 <script>
-
-
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var platforms = {{consoleNames|safe}} //safe is needed for variable to be recognized
 var sales = {{sales|safe}}
 //console.log(platforms) this will print the platform & sales to the console under inspect
-alert("hello sales")
+alert("hello from the base")
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: platforms,
         datasets: [{
-            label: 'This is the base page. I can manipulate the charts from this line of code, two lines above',
+            label: 'This line of code is associated with the table data',
             data: sales,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -30,7 +31,12 @@ var myChart = new Chart(ctx, {
                 'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)'
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',
@@ -38,7 +44,12 @@ var myChart = new Chart(ctx, {
                 'rgba(255, 206, 86, 1)',
                 'rgba(75, 192, 192, 1)',
                 'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)'
             ],
             borderWidth: 1
         }]
@@ -54,13 +65,10 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
-<!--</head>-->
-<body>
 
-<header>
-<!--    {% block header %}{% endblock %}-->
-<center><h1>placement is perfect for reading</h1></center>
-<!--    {% block content %}{% endblock %}-->
+
+
+
 
 </body>
 </html>
