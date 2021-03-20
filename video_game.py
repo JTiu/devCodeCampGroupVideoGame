@@ -4,7 +4,7 @@ from flask import render_template, Blueprint #https://search.yahoo.com/search?fr
 bp = Blueprint('video_game', __name__, )#https://www.afternerd.com/blog/python-__name__-__main__/#:~:text=__name__%20is%20simply%20a%20built-in%20variable%20in%20Python,go%20through%20a%20series%20of%20examples.%20Example%201#
 
 
-@bp.route('/')#https://flask.palletsprojects.com/en/1.1.x/blueprints/#
+@bp.route('/')##
 def index():#https://www.quora.com/Why-home-page-of-a-website-is-always-named-as-the-index-page#
     # get info saved as a variable and pass variable into view
     message = "Welcome to The DataTracker"
