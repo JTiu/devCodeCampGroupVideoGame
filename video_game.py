@@ -1,5 +1,5 @@
 import requests # for future jt, https://www.pythonforbeginners.com/requests/using-requests-in-python#
-from flask import render_template, Blueprint, jsonify  #https://search.yahoo.com/search?fr=mcafee&type=E210US1249G0&p=what+is+a+blueprint+in+flask%3F#
+from flask import render_template, Blueprint, jsonify, request  #https://search.yahoo.com/search?fr=mcafee&type=E210US1249G0&p=what+is+a+blueprint+in+flask%3F#
 print(__name__)#prints video game, as that is the name of the module#
 bp = Blueprint('video_game', __name__, )#this is the prefix for the 4 user story pages https://www.afternerd.com/blog/python-__name__-__main__/#:~:text=__name__%20is%20simply%20a%20built-in%20variable%20in%20Python,go%20through%20a%20series%20of%20examples.%20Example%201#
 print (dir(bp)) #appears only in the terminal screen#
@@ -17,24 +17,17 @@ def _indexAllGames():  # helper function to consolidate# the information as keys
     print(content[0])  # prints first index [0] of list# or -1 prints last element always "Nintendogs"
     game_details = dict()
     for game in content:
-        game_name = game["name"]
+        game_name = game["name"].lower()
         #print("currently processing ", game_name) #on/off for printing to console
         game_details[game_name] = game
         #print("Number of games indexed so far ", len(game_details))#on/off
 
     items = game_details.keys()
-    #print(items)#this will print only to terminal, the comment at the far left is an on/off to print to terminal
+    print(items)#this will print only to terminal, the comment at the far left is an on/off to print to terminal
     return game_details
 
 games = _indexAllGames()#any other function can accept this 'games' list, indexed per/game names
-print(games['Planet Monsters']);
-
-@bp.route("/game/<name>")#routes user to name of local variable using "/game/<name>"
-def display_game_details(name):
-    details = games[name]
-    print(details)
-    return render_template("video_game/GameDetails.html", game_name=name, game_details=details)
-
+print(games['planet monsters'])#test only for search function by name
 
 
 @bp.route("/")
@@ -108,16 +101,38 @@ def test():
     return "All good all day!"
 
 
+@bp.route("/game/<name>")#routes user to name of local variable using "/game/<name>"
+def display_game_details(name):
+    details = games[name.lower()]
+    print(details)
+    return render_template("video_game/GameDetails.html", game_name=name, game_details=details)
+
+
+
+@bp.route("/search_game", methods=['POST'])#routes user to html page w/ function to search game by name"
+def search_game_details():
+    name=request.form["fname"].lower() #fname is really game name per html form (user input box)
+    if name in games:
+        details = games[name]
+        print(details)
+        return render_template("video_game/GameDetails.html", game_name=name, game_details=details)
+    else:
+        return jsonify("Game does not exist in database, please try again")
 
 
 
 
+@bp.route("/search_partial", methods=['POST'])#routes user to html page w/ function to search game by name"
+def search_game_partial_name():
+    name=request.form["partial_name"].lower() #fname is really game name per html form (user input box)
 
+    matches = []
 
-
-
-
-
+    for k in games.keys():
+        if k.find(name) > -1:
+            game_entry = games[k]
+            matches.append(game_entry["name"])
+    return render_template("video_game/partialNameResults.html", partial_name=name, results=matches)
 
 # @bp.route('/VideoGameBluePrint')
 # def index():

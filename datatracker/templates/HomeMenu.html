@@ -10,5 +10,23 @@
 
 <a href="http://www.cnn.com">Link to CNN</a>
 </p>
+<h2>Search Individual Game by name</h2>
+
+<form action="{{ url_for('video_game.search_game_details') }}" method="post"><!--this 4 lines direct user input to the next html page using jinja magic-->
+  <label for="fname">Game Name:</label><br>
+  <input type="text" id="fname" name="fname"><br>
+  <input type="submit" value="Search Games">
+</form>
+
+<h2>Search Game by part of name</h2>
+
+<form action="{{ url_for('video_game.search_game_partial_name') }}" method="post"><!--this 4 lines direct user input to the next html page using jinja magic-->
+  <label for="partial_name">Partial name:</label><br>
+  <input type="text" id="partial_name" name="partial_name"><br>
+  <input type="submit" value="Find All Games">
+</form>
+
+
 
 </body>
+

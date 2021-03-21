@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <!DOCTYPE html>
+<html>
+<body>
+
+<h1>List of Results for {{partial_name}}</h1><!--jinja magic-->
+
+<p>Here are games with the searched partial name: {{partial_name}}:</p>
+      <ul>
+        {% for name in results %}
+        <li><a href="{{ url_for('video_game.display_game_details', name=name) }}">{{name}}</a></li>
+        {% endfor %}
+      </ul>
+
+</body>
+</html>
