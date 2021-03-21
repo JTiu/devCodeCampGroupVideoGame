@@ -14,5 +14,16 @@
         {% endfor %}
       </ul>
 
+<script>
+alert("inspect element here for partial name page")//javascript comment (4 languages here)
+console.log("Hello from console")
+var x = {{ partial_name|tojson }}
+var y = "hello world!"
+var z = {{results|tojson}}
+console.log("value of variable y is: ", y)
+console.log("Value of partial name is: ", x)
+console.log("Value of results is: ", z)
+
+</script>
 </body>
 </html>

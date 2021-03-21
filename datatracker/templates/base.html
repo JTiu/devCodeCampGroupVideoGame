@@ -67,7 +67,13 @@ var myChart = new Chart(ctx, {
 </script>
 
 
-
+<script>
+console.log("Hello from console")
+var x = {{ sales|tojson }}
+var y = "hello world!"
+console.log("value of var y is: ", y)
+console.log("Values of the sales are: ", x)
+</script>
 
 
 </body>
