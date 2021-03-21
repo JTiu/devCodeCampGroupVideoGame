@@ -1,1 +1,5 @@
-
+/*my home page styles*/
+body#home_page  /*the # looks for the body with an id in home page*/
+{
+background-color: red;
+}

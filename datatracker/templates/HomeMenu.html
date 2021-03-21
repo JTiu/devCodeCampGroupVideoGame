@@ -1,32 +1,64 @@
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+    <title>Group Project Data Tracker</title>
+    <!--First line to cancel if error-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">-->
+    <style>
+body#home_page  /*the # looks for the body with an id in home page*/
+{
+background-image: url("/static/images/super-mario-run-header-image-hub2.jpg");
+<!--background-color: red;-->
 
-<h1>My First Heading</h1>
-<p>My first paragraph.
-<a href="/charts/GlobalSales">Global Sales</a>
-
-<a href="/charts/CopiesSoldPerConsole">Copies Sold Per Console</a>
-
-<a href="http://www.cnn.com">Link to CNN</a>
-</p>
-<h2>Search Individual Game by name</h2>
-
-<form action="{{ url_for('video_game.search_game_details') }}" method="post"><!--this 4 lines direct user input to the next html page using jinja magic-->
-  <label for="fname">Game Name:</label><br>
-  <input type="text" id="fname" name="fname"><br>
-  <input type="submit" value="Search Games">
-</form>
-
-<h2>Search Game by part of name</h2>
-
-<form action="{{ url_for('video_game.search_game_partial_name') }}" method="post"><!--this 4 lines direct user input to the next html page using jinja magic-->
-  <label for="partial_name">Partial name:</label><br>
-  <input type="text" id="partial_name" name="partial_name"><br>
-  <input type="submit" value="Find All Games">
-</form>
+}
+#home_page h1{text-align:center;}
 
 
+    </style>
+</head>
+<body id="home_page">
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>My First home menu Heading</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5">
+            <div class="card">
+                <div class="card-body">
+                    <p>My first paragraph.
+                        <a href="/charts/GlobalSales">Global Sales</a>
 
+                        <a href="/charts/CopiesSoldPerConsole">Copies Sold Per Console</a>
+
+                        <a href="http://www.cnn.com">Link to CNN</a>
+                    </p>
+                </div>
+            </div>
+
+            <h2>Search Individual Game by name</h2>
+
+            <form action="{{ url_for('video_game.search_game_details') }}" method="post">
+                <!--this 4 lines direct user input to the next html page using jinja magic-->
+                <label for="fname">Game Name:</label><br>
+                <input type="text" id="fname" name="fname"><br>
+                <input type="submit" value="Search Games">
+            </form>
+
+            <h2>Search Game by part of name</h2>
+
+            <form action="{{ url_for('video_game.search_game_partial_name') }}" method="post">
+                <!--this 4 lines direct user input to the next html page using jinja magic-->
+                <label for="partial_name">Partial name:</label><br>
+                <input type="text" id="partial_name" name="partial_name"><br>
+                <input type="submit" value="Find All Games">
+            </form>
+        </div>
+    </div>
+
+</div>
 </body>
 
