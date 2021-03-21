@@ -1,11 +1,25 @@
 import requests # for future jt, https://www.pythonforbeginners.com/requests/using-requests-in-python#
-from flask import render_template, Blueprint #https://search.yahoo.com/search?fr=mcafee&type=E210US1249G0&p=what+is+a+blueprint+in+flask%3F#
+from flask import render_template, Blueprint, jsonify  #https://search.yahoo.com/search?fr=mcafee&type=E210US1249G0&p=what+is+a+blueprint+in+flask%3F#
+print(__name__)#prints video game, as that is the name of the module#
+bp = Blueprint('video_game', __name__, )#this is the prefix for the 4 user story pages https://www.afternerd.com/blog/python-__name__-__main__/#:~:text=__name__%20is%20simply%20a%20built-in%20variable%20in%20Python,go%20through%20a%20series%20of%20examples.%20Example%201#
+print (dir(bp)) #appears only in the terminal screen#
 
-bp = Blueprint('video_game', __name__, )#https://www.afternerd.com/blog/python-__name__-__main__/#:~:text=__name__%20is%20simply%20a%20built-in%20variable%20in%20Python,go%20through%20a%20series%20of%20examples.%20Example%201#
+print(__name__)#prints video game, as that is the name of the module#
+print(bp)
+@bp.route("/")
+def index():
+    return render_template ("HomeMenu.html")
 
 
-@bp.route('/')##
-def index():#https://www.quora.com/Why-home-page-of-a-website-is-always-named-as-the-index-page#
+
+@bp.route("/functionf1")#toy to test#
+def f1():
+  return jsonify("hello! this is function f1, see the video game page line 12")
+
+
+
+@bp.route('/charts/GlobalSales')##
+def vizGlobalSales():#this def will bundle the code and return the html indicated at the bottom#
     # get info saved as a variable and pass variable into view
     message = "Welcome to The DataTracker"
     response = requests.get('https://api.dccresource.com/api/games')
@@ -35,26 +49,27 @@ def index():#https://www.quora.com/Why-home-page-of-a-website-is-always-named-as
     sales = [i[1] for i in items]
     print("platforms: ", platforms)
     print("sales: ", sales)
-    return "all good" #render_template('base.html', consoleNames = platforms, sales=sales)#
+    return render_template('base.html', consoleNames=platforms, sales=sales)
 
     #return render_template('video_game/Index.html', message=message, response=response)#
 
 
 
-@bp.route('/CopiesSoldPerConsole')
+@bp.route('/charts/CopiesSoldPerConsole')
 def CopiesSoldPerConsole():
     # use 3 lines from above to get games data in her
     #goal
-    # loop through entire data and build a new dictionary to represetn sales per console
+    # loop through entire data and build a new dictionary to represent sales per console
     # { 'ps3': 1000, 'ps4': 20000...}
     #steps
     # exclude entries prior to 2013
     # create a dictionary with key for each console in the data
     # loop through and add up total sales in appropraite key
     message = "This is the chart for video game copies sold per console since 2013 "
-    response = requests.api('https://api.dccresource.com/api/games')
-    json_data = '{"date": "13", month : may }'
-    return render_template('Trial.html', game_data=message)
+    # response = requests.api('https://api.dccresource.com/api/games')
+    # json_data = '{"date": "13", month : may }'
+    return render_template('video_game/CopiesSoldPerConsole.html')
+
 
 
 @bp.route('/test')
