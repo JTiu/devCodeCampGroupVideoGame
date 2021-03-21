@@ -6,9 +6,40 @@ print (dir(bp)) #appears only in the terminal screen#
 
 print(__name__)#prints video game, as that is the name of the module#
 print(bp)
+
+
+def _indexAllGames():  # helper function to consolidate# the information as keys#
+    print("Running _indexAllGames")
+    response = requests.get('https://api.dccresource.com/api/games')
+    # print(response.json())#1. this should call json to the terminal step 2. comment out json object direct print#
+    content = response.json()  # function call#
+    print(len(content))  # gets length of list 16598
+    print(content[0])  # prints first index [0] of list# or -1 prints last element always "Nintendogs"
+    game_details = dict()
+    for game in content:
+        game_name = game["name"]
+        #print("currently processing ", game_name) #on/off for printing to console
+        game_details[game_name] = game
+        #print("Number of games indexed so far ", len(game_details))#on/off
+
+    items = game_details.keys()
+    #print(items)#this will print only to terminal, the comment at the far left is an on/off to print to terminal
+    return game_details
+
+games = _indexAllGames()#any other function can accept this 'games' list, indexed per/game names
+print(games['Planet Monsters']);
+
+@bp.route("/game/<name>")#routes user to name of local variable using "/game/<name>"
+def display_game_details(name):
+    details = games[name]
+    print(details)
+    return render_template("video_game/GameDetails.html", game_name=name, game_details=details)
+
+
+
 @bp.route("/")
 def index():
-    return render_template ("HomeMenu.html")
+    return render_template("HomeMenu.html")
 
 
 
@@ -75,6 +106,18 @@ def CopiesSoldPerConsole():
 @bp.route('/test')
 def test():
     return "All good all day!"
+
+
+
+
+
+
+
+
+
+
+
+
 
 # @bp.route('/VideoGameBluePrint')
 # def index():

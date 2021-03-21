@@ -1,5 +1,15 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<body>
 
-{% block content %}{% block content %}
-{{message}}
-{% endblock %}
+<h1>{{game_name}}</h1><!--jinja magic-->
+
+<p>Here are the details for game {{game_name}}:</p>
+      <ul>
+        {% for key, value in game_details.items() %}
+        <li>{{key}} : {{value}}</li>
+        {% endfor %}
+      </ul>
+
+</body>
+</html>
