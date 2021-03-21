@@ -3,8 +3,16 @@
 <body>
 
 <h1>{{game_name}}</h1><!--jinja magic-->
+<script>
+console.log("Hello from console")
+var x = {{ game_name|tojson }}
+var y = "hello world!"
+console.log("value of variable y is: ", y)
+console.log("Value of name game var is: ", x)
+</script>
 
-<p>Here are the details for game {{game_name}}:</p>
+
+<p>Here are the details for game {{game_name}}:</p><!--jinja uses double-curlies to get value of a variable-->
       <ul>
         {% for key, value in game_details.items() %}
         <li>{{key}} : {{value}}</li>

@@ -23,7 +23,7 @@ def _indexAllGames():  # helper function to consolidate# the information as keys
         #print("Number of games indexed so far ", len(game_details))#on/off
 
     items = game_details.keys()
-    print(items)#this will print only to terminal, the comment at the far left is an on/off to print to terminal
+    #print(items)#on/off switch this will print only to terminal, the comment at the far left is an on/off to print to terminal
     return game_details
 
 games = _indexAllGames()#any other function can accept this 'games' list, indexed per/game names
